@@ -29,7 +29,6 @@ public class CreateCropTypeUseCase {
 
         if(cropTypeRepository.existsByNameIgnoreCase(cropTypeRequestDTO.name())){
             throw new DuplicateResourceException("Crop Type with name '" + cropTypeRequestDTO.name() + "' already exists.");
-            // TODO: Depois criar uma exceção customizada aqui. Por agora RuntimeException funciona para testar.
         }
 
         CropType cropType = cropTypeMapper.toEntity(cropTypeRequestDTO);

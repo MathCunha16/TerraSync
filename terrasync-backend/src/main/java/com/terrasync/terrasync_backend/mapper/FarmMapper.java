@@ -24,12 +24,16 @@ public interface FarmMapper {
 
     // Ignora o 'user' porque ele será definido no serviço com o utilizador autenticado
     @Mapping(target = "user", ignore = true)
-    @Mapping(target = "id", ignore = true) // Ignora o 'ID' na criação
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
     Farm toEntity(FarmRequestDTO farmRequestDTO);
 
     // Ignora o 'user' e o 'id' para não serem atualizados a partir do DTO
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
     void updateFromDTO(FarmRequestDTO dto, @MappingTarget Farm entity);
 
 

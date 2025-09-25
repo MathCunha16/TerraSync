@@ -6,7 +6,7 @@ CREATE TABLE "farms" (
                          "state" VARCHAR(255) NOT NULL,
                          "city" VARCHAR(255) NOT NULL,
                          "country" VARCHAR(255) NOT NULL,
-                         "geolocation" POINT,
+                         "geolocation" GEOMETRY(Point, 4326),
                          "is_active" BOOLEAN NOT NULL DEFAULT TRUE,
                          "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
                          "updated_at" TIMESTAMPTZ NOT NULL DEFAULT now(),

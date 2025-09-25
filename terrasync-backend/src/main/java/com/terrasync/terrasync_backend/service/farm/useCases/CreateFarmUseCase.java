@@ -28,6 +28,7 @@ public class CreateFarmUseCase {
         this.farmMapper = farmMapper;
     }
 
+    // TODO: Corrigir erro de isActive sempre falso (Prioridade Maxima)
     public FarmResponseDTO handle(FarmRequestDTO dto, Long userId) {
         logger.info("--------- Trying to Create a new Farm for User ID: {} ---------", userId);
 

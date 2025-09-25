@@ -28,7 +28,7 @@ public class UpdateCropTypeUseCase {
     }
 
     public CropTypeResponseDTO handle(Long id, CropTypeRequestDTO dto) {
-        logger.info("--------- Trying to Update Crop Type with ID: {} ---------", id);
+        logger.info("--------- Trying to Update Crop Type with ID ---------");
 
         // Busca a entidade ou lança 404. Mais eficiente que o existsById do JPA.
         CropType cropTypeToUpdate = cropTypeRepository.findById(id)

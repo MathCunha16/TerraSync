@@ -39,20 +39,20 @@ public class CropTypeController {
         return ResponseEntity.ok(cropTypes);
     }
 
-    @GetMapping("/{id}") // Buscar um CropType pelo ID
+    @GetMapping("/{id}") // Buscar um CropType pelo 'ID'
     public ResponseEntity<CropTypeResponseDTO> findById(@PathVariable Long id) {
         CropTypeResponseDTO cropType = cropTypeServices.findCropTypeById(id);
         return ResponseEntity.ok(cropType);
     }
 
-    @PutMapping("/{id}") // Atualizar um CropType pelo ID
+    @PutMapping("/{id}") // Atualizar um CropType pelo 'ID'
     public ResponseEntity<CropTypeResponseDTO> update(@PathVariable Long id,
                                                       @Valid @RequestBody CropTypeRequestDTO cropTypeRequestDTO) {
         CropTypeResponseDTO updatedCropType = cropTypeServices.updateCropType(id, cropTypeRequestDTO);
         return ResponseEntity.ok(updatedCropType);
     }
 
-    @DeleteMapping("/{id}") // Deletar um CropType pelo ID
+    @DeleteMapping("/{id}") // Deletar um CropType pelo 'ID'
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         cropTypeServices.deleteCropType(id);
         return ResponseEntity.noContent().build();
