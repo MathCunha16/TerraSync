@@ -1,4 +1,4 @@
-package com.terrasync.terrasync_backend.dto;
+package com.terrasync.terrasync_backend.dto.cropType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

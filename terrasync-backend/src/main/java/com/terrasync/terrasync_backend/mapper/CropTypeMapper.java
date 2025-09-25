@@ -1,7 +1,7 @@
 package com.terrasync.terrasync_backend.mapper;
 
-import com.terrasync.terrasync_backend.dto.CropTypeRequestDTO;
-import com.terrasync.terrasync_backend.dto.CropTypeResponseDTO;
+import com.terrasync.terrasync_backend.dto.cropType.CropTypeRequestDTO;
+import com.terrasync.terrasync_backend.dto.cropType.CropTypeResponseDTO;
 import com.terrasync.terrasync_backend.entity.CropType;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

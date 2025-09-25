@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface CropTypeRepository extends JpaRepository<CropType, Long> {
 
-    // Método de busca para nomes (seja minusculo ou ñ)
+    // Method de busca para nomes (seja minusculo ou ñ)
     Optional<CropType> findByNameIgnoreCase(String name);
 
-    // Método pra verificar se já existe um nome para esse Crop Type
+    // Method pra verificar se já existe um nome para esse Crop Type
     boolean existsByNameIgnoreCase(String name);
 }

@@ -16,6 +16,14 @@ public class CropType extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
+    public CropType() {
+    }
+
+    // Construtor útil para o CropTypeDataSeeder
+    public CropType(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

@@ -1,4 +1,4 @@
-package com.terrasync.terrasync_backend.dto;
+package com.terrasync.terrasync_backend.dto.cropType;
 
 import java.time.OffsetDateTime;
 

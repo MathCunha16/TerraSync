@@ -1,8 +1,9 @@
 package com.terrasync.terrasync_backend.service.cropType.useCases;
 
-import com.terrasync.terrasync_backend.dto.CropTypeRequestDTO;
-import com.terrasync.terrasync_backend.dto.CropTypeResponseDTO;
+import com.terrasync.terrasync_backend.dto.cropType.CropTypeRequestDTO;
+import com.terrasync.terrasync_backend.dto.cropType.CropTypeResponseDTO;
 import com.terrasync.terrasync_backend.entity.CropType;
+import com.terrasync.terrasync_backend.exception.domain.DuplicateResourceException;
 import com.terrasync.terrasync_backend.mapper.CropTypeMapper;
 import com.terrasync.terrasync_backend.repository.CropTypeRepository;
 import org.slf4j.Logger;
@@ -27,7 +28,7 @@ public class CreateCropTypeUseCase {
         logger.info("--------- Trying to Create a new Crop Type! ---------");
 
         if(cropTypeRepository.existsByNameIgnoreCase(cropTypeRequestDTO.name())){
-            throw new RuntimeException("Crop Type with name '" + cropTypeRequestDTO.name() + "' already exists.");
+            throw new DuplicateResourceException("Crop Type with name '" + cropTypeRequestDTO.name() + "' already exists.");
             // TODO: Depois criar uma exceção customizada aqui. Por agora RuntimeException funciona para testar.
         }
 

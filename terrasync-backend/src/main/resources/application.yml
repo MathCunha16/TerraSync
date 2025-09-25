@@ -1,28 +1,24 @@
-# ===================================================================
 # Configurações do Servidor
-# ===================================================================
 server:
   port: 8080
 
-# ===================================================================
 # Configurações Gerais do Spring
-# ===================================================================
 spring:
+  # Ativa o perfil de desenvolvimento para que o DatabaseSeeder seja executado
+  profiles:
+    active: dev
+
   application:
     name: terrasync-backend
 
-  # ===================================================================
   # Configurações do Banco de Dados (Datasource) - PREENCHER
-  # ===================================================================
   datasource:
     url: jdbc:postgresql://localhost:5432/terrasync
     username: postgres
     password: Cunha123
     driver-class-name: org.postgresql.Driver
 
-  # ===================================================================
   # Configurações do JPA / Hibernate
-  # ===================================================================
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
@@ -33,9 +29,7 @@ spring:
       hibernate:
         format_sql: true
 
-# ===================================================================
 # Configurações de monitoramento (Spring Boot Actuator)
-# ===================================================================
 management:
   endpoints:
     web:
