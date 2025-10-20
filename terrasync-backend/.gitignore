@@ -9,6 +9,8 @@ hs_err_pid*
 /build/
 /out/
 /bin/
+.gradle/
+build/
 
 # ================== PACOTES GERADOS ==================
 *.jar
