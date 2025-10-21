@@ -9,7 +9,7 @@ import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {CropTypeMapper.class})
+@Mapper(componentModel = "spring")
 public interface CropMapper {
 
     @Mapping(source = "farm.id", target = "farmId")
