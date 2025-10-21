@@ -3,6 +3,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
     id("java")
     id("org.sonarqube") version "7.0.0.6105"
+    id("jacoco")
 }
 
 group = "com.terrasync"
@@ -42,6 +43,27 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+jacoco {
+    toolVersion = "0.8.13"
+}
+
+tasks.test {
+    jacoco {
+        isEnabled = true
+    }
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.8".toBigDecimal()
+            }
+        }
+    }
 }
 
 tasks.withType<JavaCompile> {

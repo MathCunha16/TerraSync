@@ -38,7 +38,7 @@ public interface FarmMapper {
 
 
     // ===================================================================
-    // Métodos de Ajuda para Geolocation (Point <=> GeolocationDTO)
+    // Métodos de Ajuda para Geolocation (Point ↔ GeolocationDTO)
     // O MapStruct vai usar estes métodos automaticamente quando encontrar estes tipos.
     // ===================================================================
 
