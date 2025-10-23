@@ -36,7 +36,6 @@ public class Crop extends BaseEntity {
     @Column(nullable = false)
     private CropStatus status = CropStatus.PLANTED;
 
-
     public Crop() {
         // Construtor vazio para JPA
     }
