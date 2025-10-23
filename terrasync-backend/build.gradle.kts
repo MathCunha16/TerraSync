@@ -6,6 +6,8 @@ plugins {
     id("jacoco")
 }
 
+val mapstructVersion = "1.5.5.Final" // Versão do MapStruct
+
 group = "com.terrasync"
 version = "0.0.1-SNAPSHOT"
 description = "Backend/API para o sistema web de monitoramento agrícola baseado em IoT"
@@ -16,25 +18,23 @@ repositories {
 }
 
 dependencies {
-    // SPRING BOOT
+    // SPRING BOOT, FLYWAY, HIBERNATE, MAPSTRUCT (Core)
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.flywaydb:flyway-database-postgresql")
+    implementation("org.hibernate.orm:hibernate-spatial") // Para tipos geométricos
+    implementation("org.mapstruct:mapstruct:$mapstructVersion")
 
     // DEVTOOLS
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
-    // DATABASE
+    // DATABASE (Driver)
     runtimeOnly("org.postgresql:postgresql")
-    implementation("org.flywaydb:flyway-database-postgresql")
 
-    // HIBERNATE SPATIAL (para tipos geométricos)
-    implementation("org.hibernate.orm:hibernate-spatial")
-
-    // MAPSTRUCT
-    implementation("org.mapstruct:mapstruct:1.5.5.Final")
-    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+    // PROCESSADORES DE ANOTAÇÃO
+    annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
 
     // TESTES
     testImplementation("org.springframework.boot:spring-boot-starter-test")
