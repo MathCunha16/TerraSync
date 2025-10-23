@@ -18,7 +18,7 @@ COPY src ./src
 # 4. Constrói o jar final e skippa os testes
 RUN ./gradlew bootJar --no-daemon
 
-# --- ESTÁGIO 3: A IMAGEM FINAL (FINAL IMAGE) ---
+# --- ESTÁGIO 2: A IMAGEM FINAL (FINAL IMAGE) ---
 # --- BEM MAIS LEVE E OTIMIZADA ----
 FROM eclipse-temurin:21-jre-alpine
 
