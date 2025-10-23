@@ -1,6 +1,5 @@
 package com.terrasync.backend.service.cropType.useCases;
 
-import com.terrasync.backend.entity.CropType;
 import com.terrasync.backend.exception.domain.ResourceNotFoundException;
 import com.terrasync.backend.repository.CropTypeRepository;
 import org.slf4j.Logger;
@@ -22,14 +21,14 @@ public class DeleteCropTypeUseCase {
     public void handle(Long id) {
         logger.info("--------- Trying to Delete Crop Type ---------");
 
-        CropType cropType = cropTypeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Crop Type with ID " + id + " not found."));
+        if (!cropTypeRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Crop Type with ID " + id + " not found.");
+        }
 
-        // TODO: Adicionar validação para impedir exclusão se CropType estiver em uso
-        // if (cropRepository.existsByCropTypeId(cropType.getId())) {
-        //     throw new BadRequestException("Cannot delete: Crop Type is in use.");
-        // }
+        // Placeholder para validação futura (sem carregar entidade!)
+        // TODO: Impedir exclusão se CropType estiver vinculado a algum Crop
+        // Ex: if (cropRepository.existsByCropTypeId(id)) { throw ... }
 
-        cropTypeRepository.delete(cropType);
+        cropTypeRepository.deleteById(id);
     }
 }
