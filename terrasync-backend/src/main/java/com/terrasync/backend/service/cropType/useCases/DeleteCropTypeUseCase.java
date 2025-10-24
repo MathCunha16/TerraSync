@@ -27,7 +27,7 @@ public class DeleteCropTypeUseCase {
 
         // Placeholder para validação futura (sem carregar entidade!)
         // TODO: Impedir exclusão se CropType estiver vinculado a algum Crop
-        // Ex: if (cropRepository.existsByCropTypeId(id)) { throw ... }
+        // Ex: if (cropRepository.existsByCropTypeId(id)) { throw .... }
 
         cropTypeRepository.deleteById(id);
     }
