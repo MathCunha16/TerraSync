@@ -13,9 +13,9 @@ spring:
 
   # Configurações do Banco de Dados (Datasource) - PREENCHER
   datasource:
-    url: jdbc:postgresql://localhost:5432/terrasync
-    username: postgres
-    password: Cunha123
+    url: jdbc:postgresql://${DB_HOST:postgres-database}:5432/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   # Configurações do JPA / Hibernate

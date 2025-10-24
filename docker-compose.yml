@@ -1,0 +1,43 @@
+services:
+    # --- Serviço do Banco de Dados (PostgreSQL) ---
+    postgres-database:
+        container_name: terrasync_db
+        image: postgis/postgis:17-3.5 # Imagem da extensão PostGIS que já vem com o PostgreSQL
+        env_file:
+            - .env
+        ports:
+            - ${DB_HOST_PORT}:5432 # Defina a porta do host para acessar o postgres
+        environment:
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_NAME}
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        networks:
+            - terra_sync_network
+
+    # --- Serviço do Backend (API) ---
+    backend-api:
+        container_name: terrasync_api
+        build:
+            context: ./terrasync-backend 
+        env_file:
+            - .env
+        ports:
+            - 8080:8080
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-database:5432/${DB_NAME}
+            SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+            SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+        depends_on:
+            - postgres-database
+        networks:
+            - terra_sync_network
+
+volumes:
+    postgres_data:
+        driver: local
+
+networks:
+    terra_sync_network:
+        driver: bridge
