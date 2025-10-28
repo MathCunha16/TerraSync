@@ -8,11 +8,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @Profile("dev")
 @Order(1) // executa primeiro
 public class UserDataSeeder implements CommandLineRunner {
+
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     private final UserRepository userRepository;
     private final Logger logger = LoggerFactory.getLogger(UserDataSeeder.class);
@@ -34,7 +37,7 @@ public class UserDataSeeder implements CommandLineRunner {
         user1.setName("Matheus Dev");
         user1.setEmail("matheus.dev@terrasync.com");
         // TODO: Usar um encoder de password real aqui (ex: BCryptPasswordEncoder)
-        user1.setHashedPassword("$2a$10$..."); // Placeholder
+        user1.setHashedPassword(encoder.encode("Matheus123")); // Placeholder
         user1.setActive(true);
 
         userRepository.save(user1);

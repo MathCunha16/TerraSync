@@ -13,7 +13,7 @@ spring:
 
   # Configurações do Banco de Dados (Datasource) - PREENCHER
   datasource:
-    url: jdbc:postgresql://${DB_HOST:postgres-database}:5432/${DB_NAME}
+    url: jdbc:postgresql://${DB_HOST:postgres-database}:5431/${DB_NAME}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -36,3 +36,8 @@ management:
       exposure:
         # Expõe os endpoints de 'health' (saúde da aplicação) e 'info'.
         include: health,info
+
+api:
+  security:
+    token:
+      secret: MySecretKeysSuperLongaDePeloMenos64CaracteresBase64CriadoPorMatheusLeão
