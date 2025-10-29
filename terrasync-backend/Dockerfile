@@ -9,6 +9,10 @@ COPY gradle ./gradle
 COPY build.gradle.kts .
 COPY settings.gradle.kts .
 
+# Fix line endings e permissões
+RUN sed -i 's/\r$//' ./gradlew
+RUN chmod +x ./gradlew
+
 # 2. Roda um comando que APENAS baixa as dependências, criando camada de cache
 RUN ./gradlew dependencies --no-daemon
 

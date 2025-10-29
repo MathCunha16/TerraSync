@@ -12,6 +12,7 @@ hs_err_pid*
 
 # ================== PACOTES GERADOS ==================
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 *.war
 *.ear
 *.zip
