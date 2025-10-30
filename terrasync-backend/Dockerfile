@@ -38,7 +38,7 @@ EXPOSE 8080
 CMD ["java", "-jar", "TerraSyncApi.jar"]
 
 # Estágio 4: Test
-FROM dependencies as test
+FROM dependencies AS test
 
 # Copia o código fonte
 COPY src ./src
