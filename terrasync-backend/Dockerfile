@@ -1,36 +1,47 @@
-# --- ESTÁGIO 1: O "CONSTRUTOR" (BUILDER) ---
-FROM eclipse-temurin:21-jdk AS builder
+# Estágio 1: Dependencies
+FROM eclipse-temurin:21-jdk AS dependencies
 
 WORKDIR /app
 
-# 1. Copia os arquivos de build para otimizar o cache
+# Copia os arquivos de configuração do Gradle
 COPY gradlew .
 COPY gradle ./gradle
 COPY build.gradle.kts .
 COPY settings.gradle.kts .
 
 # Fix line endings e permissões
-RUN sed -i 's/\r$//' ./gradlew
-RUN chmod +x ./gradlew
+RUN sed -i 's/\r$//' ./gradlew && chmod +x ./gradlew
 
-# 2. Roda um comando que APENAS baixa as dependências, criando camada de cache
+# Baixa as dependências (cria uma camada de cache)
 RUN ./gradlew dependencies --no-daemon
 
-# 3. Copia o resto do código-fonte
+# Estágio 2: Builder
+FROM dependencies AS builder
+
+#Copia o código fonte
 COPY src ./src
 
-# 4. Constrói o jar final e skippa os testes
+#Compila o JAR (Sem rodar os testes)
 RUN ./gradlew bootJar --no-daemon
 
-# --- ESTÁGIO 2: A IMAGEM FINAL (FINAL IMAGE) ---
-# --- BEM MAIS LEVE E OTIMIZADA ----
-FROM eclipse-temurin:21-jre-alpine
+# Estágio 3: Production
+FROM eclipse-temurin:21-jre-alpine AS production
 
 WORKDIR /app
 
+#Copia apenas o JAR compilado no estágio builder
 COPY --from=builder /app/build/libs/*.jar TerraSyncApi.jar
 
 EXPOSE 8080
 
-# Setando o comando para rodar a aplicação
-ENTRYPOINT ["java", "-jar", "TerraSyncApi.jar"]
+# Comando padrão para rodar a aplicação
+CMD ["java", "-jar", "TerraSyncApi.jar"]
+
+# Estágio 4: Test
+FROM dependencies as test
+
+# Copia o código fonte
+COPY src ./src
+
+# Comando padrão: rodar os testes
+CMD ["./gradlew", "test", "--no-daemon"]
