@@ -1,39 +1,46 @@
 services:
-    # --- Serviço do Banco de Dados (PostgreSQL) ---
-    postgres-database:
-        container_name: terrasync_db
-        image: postgis/postgis:17-3.5 # Imagem da extensão PostGIS que já vem com o PostgreSQL
-        env_file:
-            - .env
-        ports:
-            - ${DB_HOST_PORT}:5432 # Defina a porta do host para acessar o postgres
-        environment:
-            POSTGRES_USER: ${DB_USERNAME}
-            POSTGRES_PASSWORD: ${DB_PASSWORD}
-            POSTGRES_DB: ${DB_NAME}
-        volumes:
-            - postgres_data:/var/lib/postgresql/data
-        networks:
-            - terra_sync_network
+  # --- Serviço do Banco de Dados (PostgreSQL) ---
+  postgres-database:
+    container_name: terrasync_db
+    image: postgis/postgis:17-3.5-alpine
+    env_file:
+      - .env
+    ports:
+      - ${DB_HOST_PORT}:5432
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - terra_sync_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-    # --- Serviço do Backend (API) ---
-    backend-api:
-        container_name: terrasync_api
-        build:
-            context: ./terrasync-backend 
-        env_file:
-            - .env
-        ports:
-            - "8080:8080"
-        depends_on:
-            - postgres-database
-        networks:
-            - terra_sync_network
+  # --- Serviço do Backend (API DESENVOLVIMENTO) ---
+  backend-api:
+    container_name: terrasync_api_dev
+    build:
+      context: ./terrasync-backend
+      target: production  # ← Usa o stage production (mais leve)
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres-database:
+        condition: service_healthy
+    networks:
+      - terra_sync_network
 
 volumes:
-    postgres_data:
-        driver: local
+  postgres_data:
+    driver: local
 
 networks:
-    terra_sync_network:
-        driver: bridge
+  terra_sync_network:
+    driver: bridge
