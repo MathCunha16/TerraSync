@@ -1,0 +1,18 @@
+services:
+  backend-test:
+    build:
+      context: ./terrasync-backend
+      target: test
+    container_name: terrasync_test
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - terra_sync_network
+
+networks:
+  terra_sync_network:
+    driver: bridge
