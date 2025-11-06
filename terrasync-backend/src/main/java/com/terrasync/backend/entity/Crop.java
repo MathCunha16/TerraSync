@@ -3,6 +3,8 @@ package com.terrasync.backend.entity;
 import com.terrasync.backend.entity.base.BaseEntity;
 import com.terrasync.backend.entity.enums.CropStatus;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -33,6 +35,7 @@ public class Crop extends BaseEntity {
     private LocalDate harvestDate;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(nullable = false)
     private CropStatus status = CropStatus.PLANTED;
 
