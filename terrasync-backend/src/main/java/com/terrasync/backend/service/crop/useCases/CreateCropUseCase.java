@@ -25,7 +25,6 @@ public class CreateCropUseCase {
     private final CropTypeRepository cropTypeRepository;
     private final CropMapper cropMapper;
 
-    @Autowired
     public CreateCropUseCase(
             CropRepository cropRepository,
             FarmRepository farmRepository,

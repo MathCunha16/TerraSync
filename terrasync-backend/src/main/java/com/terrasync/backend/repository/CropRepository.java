@@ -21,5 +21,8 @@ public interface CropRepository extends JpaRepository<Crop, Long> {
 
     // Verifica se uma cultura com um determinado nome já existe numa fazenda específica.
     boolean existsByNameIgnoreCaseAndFarm_Id(String name, Long farmId);
+
+    // Encontra uma cultura pelo seu ID e pelo ID do usuário proprietário da fazenda.
+    Optional<Crop> findByIdAndFarm_User_Id(Long cropId, Long userId);
 }
 
