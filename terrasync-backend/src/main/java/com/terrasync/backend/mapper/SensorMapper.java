@@ -17,6 +17,7 @@ public interface SensorMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "crop", ignore = true)
+    @Mapping(target = "lastHeartbeat", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     Sensor toEntity(SensorRequestDTO sensorRequestDTO);
@@ -24,6 +25,7 @@ public interface SensorMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "crop", ignore = true)
+    @Mapping(target = "lastHeartbeat", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     void updateFromDTO(SensorRequestDTO dto, @MappingTarget Sensor entity);

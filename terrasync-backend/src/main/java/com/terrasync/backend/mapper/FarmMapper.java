@@ -17,21 +17,22 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface FarmMapper {
 
-    @Mapping(source = "user.id", target = "userId") // Mapeia o 'ID' de 'user'
+    @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "active", target = "isActive")
     FarmResponseDTO toResponseDTO(Farm farm);
 
     List<FarmResponseDTO> toResponseDTOList(List<Farm> farms);
 
-    // Ignora o 'user' porque ele será definido no serviço com o utilizador autenticado
-    @Mapping(target = "user", ignore = true)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "active", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     Farm toEntity(FarmRequestDTO farmRequestDTO);
 
-    // Ignora o 'user' e o 'id' para não serem atualizados a partir do DTO
-    @Mapping(target = "user", ignore = true)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "active", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     void updateFromDTO(FarmRequestDTO dto, @MappingTarget Farm entity);
