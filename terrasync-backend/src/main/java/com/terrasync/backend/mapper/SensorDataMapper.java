@@ -23,14 +23,14 @@ public interface SensorDataMapper {
     @Mapping(target = "sensor", ignore = true)
     SensorData toEntity(SensorDataRequestDTO sensorDataRequestDTO);
 
-    default OffsetDateTime map(Instant instant) {
+    default OffsetDateTime instantToOffsetDateTime(Instant instant) {
         if (instant == null) {
             return null;
         }
         return instant.atOffset(ZoneOffset.UTC); // Assuming UTC for Instant storage
     }
 
-    default Instant map(OffsetDateTime offsetDateTime) {
+    default Instant offsetDateTimeToInstant(OffsetDateTime offsetDateTime) {
         if (offsetDateTime == null) {
             return null;
         }
