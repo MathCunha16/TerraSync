@@ -13,7 +13,7 @@ import java.util.List;
 
 @Configuration
 @Profile("dev") // só vai executar em perfil de desenvolvimento
-@Order(2)
+@Order(3)
 public class CropTypeDataSeeder implements CommandLineRunner {
 
     private final CropTypeRepository cropTypeRepository;

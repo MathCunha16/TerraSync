@@ -18,7 +18,7 @@ import java.time.LocalDate;
 
 @Configuration
 @Profile("dev")
-@Order(3) // Executa depois de User, CropType e Farm
+@Order(4) // Executa depois de User, CropType e Farm
 public class CropDataSeeder implements CommandLineRunner {
 
     private final CropRepository cropRepository;
